@@ -58,4 +58,17 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function classes() {
+        return $this->belongsToMany(TrClass::class, 'tr_class_members', 'user_id', 'class_id');
+    }
+
+    public function classesAsOwner() {
+        return $this->hasMany(TrClass::class, 'created_by');
+    }
+
+    public function posts() {
+        return $this->hasMany(TrClassPost::class, 'created_by');
+    }
+
 }

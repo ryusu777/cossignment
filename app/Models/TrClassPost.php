@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class TrClassPost extends Model
+{
+    use HasFactory;
+    public $primaryKey = 'post_id';
+
+    public function comments() {
+        return $this->hasMany(TrPostComment::class);
+    }
+
+    public function theClass() {
+        return $this->belongsTo(TrClass::class, 'class_id');
+    }
+
+    public function user() {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+}
