@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TrClass;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -20,8 +21,29 @@ class ClassController extends Controller
                 'users.name as user_name'
             )
             ->get();
-        return Inertia::render('Classes/Index', [
+        return Inertia::render('Classes/ClassList', [
             'classes' => $classes,
+        ]);
+    }
+
+    public function theClass(int $id)
+    {
+        $theClass = TrClass::find($id);
+        $posts = $theClass->posts()
+            ->join('users', 'tr_class_posts.created_by', '=', 'users.id')
+            ->select('tr_class_posts.*', 'users.name as user_name')
+            ->with(['comments' => fn ($query) => 
+                $query
+                    ->join('users', 'tr_post_comments.user_id', '=', 'users.id')
+                    ->select('tr_post_comments.*', 'users.name as user_name')
+                    ->get()
+            ])
+            ->get();
+             
+            
+        return Inertia::render('Classes/ClassPage', [
+            'theClass' => $theClass,
+            'classPosts' => $posts
         ]);
     }
 }

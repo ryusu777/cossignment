@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\ClassController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -30,3 +32,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('/classes', [ClassController::class, 'index']);
+Route::get('/class/{id}', [ClassController::class, 'theClass']);
+
+Route::get('/demo', function (Request $request) {
+    return $request->user() ?? "Hello world";
+});
