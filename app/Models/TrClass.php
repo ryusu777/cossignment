@@ -11,7 +11,7 @@ class TrClass extends Model
     public $primaryKey = 'class_id';
 
     public function posts() {
-        return $this->hasMany(TrClassPost::class);
+        return $this->hasMany(TrClassPost::class, 'class_id');
     }
 
     public function user() {

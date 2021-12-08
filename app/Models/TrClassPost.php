@@ -11,7 +11,7 @@ class TrClassPost extends Model
     public $primaryKey = 'post_id';
 
     public function comments() {
-        return $this->hasMany(TrPostComment::class);
+        return $this->hasMany(TrPostComment::class, 'post_id');
     }
 
     public function theClass() {
