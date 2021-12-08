@@ -30,7 +30,10 @@ class DatabaseSeeder extends Seeder
         // Create class members
         User::factory(30)->
             create(['role' => 'student'])->each(function ($user) use ($classes){
-                $user->classes()->attach($classes->random());
+                $randomClass = $classes->random(4);
+                foreach ($randomClass as $class) {
+                    $user->classes()->attach($class);
+                }
             });
         
         // Create random class posts
