@@ -14,32 +14,36 @@
         :comment="comment"
       />
       <jet-label value="Your comment" class="mt-4 text-blue-300" />
-      <div>
+      <form @submit.prevent="sendCreateComment">
         <jet-input
           class="block w-full"
           type="text"
           placeholder="Type here..."
+          v-model="form.comment_body"
         ></jet-input>
         <jet-btn
           class="mt-3 py-2 px-5 bg-blue-500 rounded-lg font-bold text-white"
-          @click="sendCreateComments"
+          type="submit"
         >
           Send
         </jet-btn>
-      </div>
+      </form>
     </base-card>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, inject, reactive } from "vue";
 import BaseCard from "../../../Components/BaseCard.vue";
 import JetInput from "../../../Jetstream/Input.vue";
 import JetBtn from "../../../Jetstream/Button.vue";
 import JetLabel from "../../../Jetstream/Label.vue";
 import PostComment from "./PostComment.vue";
+import { usePage } from "@inertiajs/inertia-vue3";
+import axios from "axios";
 
 export default defineComponent({
+  emits: ["commented"],
   components: {
     BaseCard,
     JetInput,
@@ -49,6 +53,27 @@ export default defineComponent({
   },
   props: {
     post: Object,
+  },
+  setup(props, { emit }) {
+    const form = reactive({
+      user_id: usePage().props.value.auth.user.id,
+      post_id: props.post.post_id,
+      comment_body: null,
+    });
+
+    const route = inject("$route");
+
+    async function sendCreateComment() {
+      try {
+        const response = await axios.post(route("comment.create"), form);
+        emit("commented", response.data);
+        form.comment_body = null;
+      } catch {}
+    }
+    return {
+      form,
+      sendCreateComment,
+    };
   },
 });
 </script>

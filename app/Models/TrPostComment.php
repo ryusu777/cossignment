@@ -10,6 +10,12 @@ class TrPostComment extends Model
     use HasFactory;
     public $primaryKey = 'comment_id';
 
+    public $fillable = [
+        'post_id',
+        'comment_body',
+        'user_id'
+    ];
+
     public function post() {
         return $this->belongsTo(TrClassPost::class, 'post_id');
     }

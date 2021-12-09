@@ -7,19 +7,23 @@
     </template>
     <div class="py-12 px-8">
       <!-- Posts -->
-      <post v-for="post in classPosts" :post="post" :key="post.post_id" />
+      <post
+        v-for="post in mutablePost"
+        :post="post"
+        :key="post.post_id"
+        @commented="newComment"
+      />
     </div>
   </app-layout>
 </template>
 
 <script>
-import { defineComponent, onMounted } from "vue";
+import { defineComponent, ref } from "vue";
 import AppLayout from "../../Layouts/AppLayout.vue";
 import JetInput from "../../Jetstream/Input.vue";
 import JetLabel from "../../Jetstream/Label.vue";
 import BaseCard from "../../Components/BaseCard.vue";
 import Post from "./Partials/Post.vue";
-import axios from "axios";
 
 export default defineComponent({
   components: {
@@ -34,15 +38,17 @@ export default defineComponent({
     classPosts: Array,
   },
   setup(props) {
-    async function sendCreateComments() {
-      await axios.post("http://localhost:8000/comments", {
-        test: "Test variable",
-        postId: "PostId",
-      });
+    const mutablePost = ref([...props.classPosts]);
+
+    function newComment(comment) {
+      mutablePost.value[
+        mutablePost.value.findIndex((p) => p.post_id === comment[0].post_id)
+      ].comments.push(comment[0]);
     }
 
     return {
-      sendCreateComments,
+      mutablePost,
+      newComment,
     };
   },
 });
