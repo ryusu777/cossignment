@@ -52,14 +52,15 @@ class ClassController extends Controller
         $posts = $theClass->posts()
             ->join('users', 'tr_class_posts.created_by', '=', 'users.id')
             ->select('tr_class_posts.*', 'users.name as user_name')
-            ->with(['comments' => fn ($query) => 
-                $query
+            ->get();
+        
+        foreach ($posts as $p) {
+            $p['comments'] = $p->comments()
                     ->join('users', 'tr_post_comments.user_id', '=', 'users.id')
                     ->select('tr_post_comments.*', 'users.name as user_name')
-                    ->get()
-            ])
-            ->get();
-             
+                    ->take(5)
+                    ->get();
+        }
             
         return Inertia::render('Classes/ClassPage', [
             'theClass' => $theClass,
