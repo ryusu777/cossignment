@@ -28,7 +28,6 @@
                 <jet-nav-link
                   :href="route('classes')"
                   :active="route().current('classes')"
-                  v-if="$page.props.user.role === 'teacher'"
                 >
                   Class List
                 </jet-nav-link>
