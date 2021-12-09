@@ -1,9 +1,10 @@
 <template>
   <app-layout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+      <h2 class="font-semibold text-3xl text-gray-800 leading-tight">
         {{ theClass.class_name }}
       </h2>
+      <p>Class code: {{ theClass.class_code }}</p>
     </template>
     <div class="py-12 px-8">
       <!-- Posts -->
