@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\CommentController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -36,6 +37,10 @@ Route::get('/classes', [ClassController::class, 'index'])->name('classes');
 Route::get('/class/create', [ClassController::class, 'createForm'])->name('class.form.create');
 Route::get('/class/{id}', [ClassController::class, 'theClass'])->name('class');
 Route::post('/class', [ClassController::class, 'store'])->name('class.create');
+
+// Comment Controller
+Route::post('/comment', [CommentController::class, 'store'])->name('comment.create');
+Route::get('/comment/{postId}', [CommentController::class, 'get'])->name('comments');
 
 Route::get('/demo', function (Request $request) {
     return $request->user() ?? "Hello world";
