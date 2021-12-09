@@ -1,5 +1,6 @@
 <template>
   <textarea
+    v-bind="$attrs"
     class="
       border-gray-300
       focus:border-indigo-300
@@ -15,6 +16,7 @@
     v-if="type === 'textarea'"
   ></textarea>
   <input
+    v-bind="$attrs"
     v-else
     :type="type"
     class="
@@ -36,6 +38,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  inheritAttrs: false,
   props: ["modelValue", "type"],
 
   emits: ["update:modelValue"],
