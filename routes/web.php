@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\CommentController;
-use App\Models\User;
+use App\Http\Controllers\ClassMemberController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -41,6 +41,12 @@ Route::post('/class', [ClassController::class, 'store'])->name('class.create');
 // Comment Controller
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.create');
 Route::get('/comment/{postId}', [CommentController::class, 'get'])->name('comments');
+
+// Class Member Controller
+Route::get('/join-class', [ClassMemberController::class, 'join'])
+    ->name('class-member.join');
+Route::post('/join-class', [ClassMemberController::class, 'store'])
+    ->name('class-member.store');
 
 Route::get('/demo', function (Request $request) {
     return $request->user() ?? "Hello world";
