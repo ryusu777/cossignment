@@ -12,6 +12,7 @@
         :post="post"
         :key="post.post_id"
         @commented="newComment"
+        @addedComment="post.comments = $event"
       />
     </div>
   </app-layout>

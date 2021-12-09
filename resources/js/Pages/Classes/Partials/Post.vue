@@ -13,6 +13,11 @@
         :key="comment.comment_id"
         :comment="comment"
       />
+      <a
+        @click="sendGetComments"
+        class="text-blue-600 underline cursor-pointer text-sm"
+        >Show all</a
+      >
       <jet-label value="Your comment" class="mt-4 text-blue-300" />
       <form @submit.prevent="sendCreateComment">
         <jet-input
@@ -43,7 +48,7 @@ import { usePage } from "@inertiajs/inertia-vue3";
 import axios from "axios";
 
 export default defineComponent({
-  emits: ["commented"],
+  emits: ["commented", "addedComment"],
   components: {
     BaseCard,
     JetInput,
@@ -70,7 +75,20 @@ export default defineComponent({
         form.comment_body = null;
       } catch {}
     }
+
+    async function sendGetComments() {
+      try {
+        const response = await axios.get(
+          route("comments", {
+            postId: props.post.post_id,
+          })
+        );
+        console.log(response.data);
+        emit("addedComment", response.data);
+      } catch {}
+    }
     return {
+      sendGetComments,
       form,
       sendCreateComment,
     };
