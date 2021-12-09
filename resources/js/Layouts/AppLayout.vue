@@ -25,6 +25,19 @@
                 >
                   Dashboard
                 </jet-nav-link>
+                <jet-nav-link
+                  :href="route('classes')"
+                  :active="route().current('classes')"
+                  v-if="$page.props.user.role === 'teacher'"
+                >
+                  Class List
+                </jet-nav-link>
+                <jet-nav-link
+                  :href="route('classes')"
+                  :active="route().current('classes')"
+                >
+                  Create Class
+                </jet-nav-link>
                 <slot name="nav-link"></slot>
               </div>
             </div>

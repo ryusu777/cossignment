@@ -31,8 +31,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
 
-Route::get('/classes', [ClassController::class, 'index']);
-Route::get('/class/{id}', [ClassController::class, 'theClass']);
+Route::get('/classes', [ClassController::class, 'index'])->name('classes');
+Route::get('/class/{id}', [ClassController::class, 'theClass'])->name('class');
 
 Route::get('/demo', function (Request $request) {
     return $request->user() ?? "Hello world";
