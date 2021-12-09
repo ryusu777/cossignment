@@ -30,7 +30,15 @@
             <p class="mt-2">{{ comment.comment_body }}</p>
           </base-card>
           <jet-label value="Your comment" class="mt-4 text-blue-300" />
-          <jet-input class="block w-full" type="text"></jet-input>
+          <div>
+            <jet-input class="block w-full" type="text"></jet-input>
+            <button
+              class="mt-3 py-2 px-5 bg-blue-500 rounded-lg font-bold text-white"
+              @click="sendCreateComments"
+            >
+              Send
+            </button>
+          </div>
         </base-card>
       </div>
     </div>
@@ -43,6 +51,7 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import JetInput from "../../Jetstream/Input.vue";
 import JetLabel from "../../Jetstream/Label.vue";
 import BaseCard from "../../Components/BaseCard.vue";
+import axios from "axios";
 
 export default defineComponent({
   components: {
@@ -56,7 +65,16 @@ export default defineComponent({
     classPosts: Array,
   },
   setup(props) {
-    onMounted(() => console.log(props.classPosts));
+    async function sendCreateComments() {
+      await axios.post("http://localhost:8000/comments", {
+        test: "Test variable",
+        postId: "PostId",
+      });
+    }
+
+    return {
+      sendCreateComments,
+    };
   },
 });
 </script>

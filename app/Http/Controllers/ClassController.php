@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TrClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ClassController extends Controller
@@ -64,5 +65,24 @@ class ClassController extends Controller
             'theClass' => $theClass,
             'classPosts' => $posts
         ]);
+    }
+
+    public function createForm()
+    {
+        return Inertia::render('Classes/CreateClass');
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'class_name' => 'required|min:3',
+            'class_code' => 'unique:App\Models\TrClass,class_code|max:12',
+            'class_description' => 'max:255',
+            'created_by' => 'required'
+        ]);
+
+        TrClass::create($validated);
+
+        return Redirect::route('classes');
     }
 }

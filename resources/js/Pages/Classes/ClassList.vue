@@ -1,7 +1,17 @@
 <template>
   <app-layout>
     <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">Classes</h2>
+      <div class="flex flex-row justify-between">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+          Classes
+        </h2>
+        <div>
+          <jet-btn class="mr-3"
+            ><a :href="route('class.form.create')">Create Class</a></jet-btn
+          >
+          <jet-btn>Join Class</jet-btn>
+        </div>
+      </div>
     </template>
 
     <div class="py-12 px-8">
@@ -25,11 +35,9 @@
           </div>
           <h1 class="text-4xl font-bold">{{ theClass.class_name }}</h1>
           <p>{{ theClass.class_description }}</p>
-          <button
-            class="mt-3 py-2 px-5 bg-blue-500 rounded-lg font-bold text-white"
-          >
+          <jet-btn class="bg-blue-400 mt-4">
             <a :href="`class/${theClass.class_id}`">Enter</a>
-          </button>
+          </jet-btn>
         </base-card>
       </div>
     </div>
@@ -37,14 +45,16 @@
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import AppLayout from "../../Layouts/AppLayout.vue";
 import BaseCard from "../../Components/BaseCard.vue";
+import JetBtn from "../../Jetstream/Button.vue";
 
 export default defineComponent({
   components: {
     AppLayout,
     BaseCard,
+    JetBtn,
   },
   props: {
     classes: Array,

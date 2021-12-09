@@ -10,6 +10,14 @@ class TrClass extends Model
     use HasFactory;
     public $primaryKey = 'class_id';
 
+    public $fillable = [
+        'class_name',
+        'class_code',
+        'class_description',
+        'created_by'
+    ];
+
+
     public function posts() {
         return $this->hasMany(TrClassPost::class, 'class_id');
     }
