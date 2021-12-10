@@ -15,6 +15,7 @@
       />
       <a
         @click="sendGetComments"
+        v-if="showAllLink"
         class="text-blue-600 underline cursor-pointer text-sm"
         >Show all</a
       >
@@ -38,7 +39,7 @@
 </template>
 
 <script>
-import { defineComponent, inject, reactive } from "vue";
+import { defineComponent, inject, reactive, ref } from "vue";
 import BaseCard from "../../../Components/BaseCard.vue";
 import JetInput from "../../../Jetstream/Input.vue";
 import JetBtn from "../../../Jetstream/Button.vue";
@@ -60,6 +61,7 @@ export default defineComponent({
     post: Object,
   },
   setup(props, { emit }) {
+    const showAllLink = ref(props.post.comments >= 5);
     const form = reactive({
       user_id: usePage().props.value.auth.user.id,
       post_id: props.post.post_id,
@@ -85,10 +87,12 @@ export default defineComponent({
         );
         console.log(response.data);
         emit("addedComment", response.data);
+        showAllLink.value = false;
       } catch {}
     }
     return {
       sendGetComments,
+      showAllLink,
       form,
       sendCreateComment,
     };
