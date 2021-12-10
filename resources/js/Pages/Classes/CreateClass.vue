@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { defineComponent, reactive } from "vue";
+import { defineComponent } from "vue";
 import { useForm, usePage } from "@inertiajs/inertia-vue3";
 import JetInput from "../../Jetstream/Input.vue";
 import JetLabel from "../../Jetstream/Label.vue";
