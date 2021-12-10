@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ClassMemberController;
+use App\Http\Controllers\PostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,9 @@ Route::get('/join-class', [ClassMemberController::class, 'join'])
     ->name('class-member.join');
 Route::post('/join-class', [ClassMemberController::class, 'store'])
     ->name('class-member.store');
+
+// Post Controller
+Route::post('/post', [PostController::class, 'store'])->name('post.store');
 
 Route::get('/demo', function (Request $request) {
     return $request->user() ?? "Hello world";

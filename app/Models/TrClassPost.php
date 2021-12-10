@@ -9,6 +9,12 @@ class TrClassPost extends Model
 {
     use HasFactory;
     public $primaryKey = 'post_id';
+    public $fillable = [
+        'created_by',
+        'class_id',
+        'post_title',
+        'post_body',
+    ];
 
     public function comments() {
         return $this->hasMany(TrPostComment::class, 'post_id');
