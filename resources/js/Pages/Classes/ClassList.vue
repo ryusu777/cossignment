@@ -6,10 +6,12 @@
           Classes
         </h2>
         <div>
-          <jet-btn class="mr-3"
+          <jet-btn class="mr-3" v-if="$page.props.auth.user.role === 'teacher'"
             ><a :href="route('class.form.create')">Create Class</a></jet-btn
           >
-          <jet-btn>Join Class</jet-btn>
+          <jet-btn
+            ><a :href="route('class-member.join')">Join Class</a></jet-btn
+          >
         </div>
       </div>
     </template>
