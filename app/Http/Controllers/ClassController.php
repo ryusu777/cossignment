@@ -46,9 +46,12 @@ class ClassController extends Controller
         ]);
     }
 
-    public function theClass(int $id)
+    public function theClass(Request $request, int $id)
     {
         $theClass = TrClass::find($id);
+
+        if ($theClass->members()->find($request->user()->id) == null && $theClass->user()->first()->id != $request->user()->id)
+            abort(403);
         $posts = $theClass->posts()
             ->join('users', 'tr_class_posts.created_by', '=', 'users.id')
             ->select('tr_class_posts.*', 'users.name as user_name')
