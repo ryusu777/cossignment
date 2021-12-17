@@ -4,6 +4,7 @@
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
         Join class
       </h2>
+      <jet-validation-error />
       <form
         class="py-12 px-8 flex flex-col"
         @submit.prevent="form.post(route('class-member.store'))"
@@ -29,6 +30,7 @@ import AppLayout from "../../Layouts/AppLayout.vue";
 import JetLabel from "../../Jetstream/Label.vue";
 import JetInput from "../../Jetstream/Input.vue";
 import JetBtn from "../../Jetstream/Button.vue";
+import JetValidationError from "../../Jetstream/ValidationErrors.vue";
 import { useForm, usePage } from "@inertiajs/inertia-vue3";
 
 export default defineComponent({
@@ -37,6 +39,7 @@ export default defineComponent({
     JetLabel,
     JetInput,
     JetBtn,
+    JetValidationError,
   },
   setup() {
     const form = useForm({
