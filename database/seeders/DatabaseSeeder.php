@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\TrAssignment;
+use App\Models\TrAssignmentAttachment;
+use App\Models\TrAssignmentTurnIn;
 use App\Models\TrClass;
 use App\Models\TrClassPost;
 use App\Models\TrPostComment;
@@ -41,5 +44,10 @@ class DatabaseSeeder extends Seeder
 
         // Create random post comments
         TrPostComment::factory(30)->create();
+
+        // Assignments seeding
+        TrAssignment::factory(30)->create();
+        TrAssignmentAttachment::factory(10)->create();
+        TrAssignmentTurnIn::factory(50)->create();
     }
 }
