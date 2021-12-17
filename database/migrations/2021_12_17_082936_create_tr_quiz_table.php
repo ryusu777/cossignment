@@ -22,6 +22,9 @@ class CreateTrQuizTable extends Migration
             $table->time('quiz_duration');
             $table->text('quiz_description');
             $table->timestamps();
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('class_id')->references('class_id')->on('tr_classes');
         });
     }
 
