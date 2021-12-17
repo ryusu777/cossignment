@@ -16,8 +16,8 @@ class CreateTrAssignmentAttachmentTable extends Migration
         Schema::create('tr_assignment_attachment', function (Blueprint $table) {
             $table->id('assignment_attachment_id');
             $table->foreignId('assignment_id');
-            $table->string('file_name', 255);
-            $table->string('file_link', 511);
+            $table->string('file_name', 50);
+            $table->string('file_link', 255);
             $table->timestamps();
 
             $table->foreign('assignment_id')->references('assignment_id')->on('tr_assignment');

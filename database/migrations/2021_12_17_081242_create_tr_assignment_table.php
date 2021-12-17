@@ -17,7 +17,7 @@ class CreateTrAssignmentTable extends Migration
             $table->id('assignment_id');
             $table->foreignId('created_by');
             $table->foreignId('class_id');
-            $table->string('assignment_title', 100);
+            $table->string('assignment_title', 50);
             $table->dateTime('assignment_due');
             $table->text('assignment_description');
             $table->timestamps();

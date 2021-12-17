@@ -17,7 +17,7 @@ class CreateTrAssignmentTurnInTable extends Migration
             $table->id('turn_in_id');
             $table->foreignId('student_id');
             $table->foreignId('assignment_id');
-            $table->string('file_link', 500);
+            $table->string('file_link', 255);
             $table->text('body');
             $table->timestamps();
 
