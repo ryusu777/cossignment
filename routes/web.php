@@ -29,28 +29,30 @@ Route::get('/', function () {
     ]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', fn () => Inertia::render('Dashboard'))->name('dashboard');
 
-// Class Controller
-Route::get('/classes', [ClassController::class, 'index'])->name('classes');
-Route::get('/class/create', [ClassController::class, 'createForm'])->name('class.form.create');
-Route::get('/class/{id}', [ClassController::class, 'theClass'])->name('class');
-Route::post('/class', [ClassController::class, 'store'])->name('class.create');
+    // Class Controller
+    Route::middleware(['role:teacher'])->post('/class', [ClassController::class, 'store'])->name('class.create');
+    Route::middleware(['role:teacher'])->get('/class/create', [ClassController::class, 'createForm'])->name('class.form.create');
+    Route::get('/classes', [ClassController::class, 'index'])->name('classes');
+    Route::get('/class-forum/{id}', [ClassController::class, 'theClass'])->name('class');
 
-// Comment Controller
-Route::post('/comment', [CommentController::class, 'store'])->name('comment.create');
-Route::get('/comment/{postId}', [CommentController::class, 'get'])->name('comments');
+    // Comment Controller
+    Route::post('/comment', [CommentController::class, 'store'])->name('comment.create');
+    Route::get('/comment/{postId}', [CommentController::class, 'get'])->name('comments');
 
-// Class Member Controller
-Route::get('/join-class', [ClassMemberController::class, 'join'])
-    ->name('class-member.join');
-Route::post('/join-class', [ClassMemberController::class, 'store'])
-    ->name('class-member.store');
+    // Class Member Controller
+    Route::get('/join-class', [ClassMemberController::class, 'join'])
+        ->name('class-member.join');
+    Route::post('/join-class', [ClassMemberController::class, 'store'])
+        ->name('class-member.store');
 
-// Post Controller
-Route::post('/post', [PostController::class, 'store'])->name('post.store');
+    // Post Controller
+    Route::post('/post', [PostController::class, 'store'])->name('post.store');
+});
+
+
 
 Route::get('/demo', function (Request $request) {
     return $request->user() ?? "Hello world";
