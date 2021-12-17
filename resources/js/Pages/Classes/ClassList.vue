@@ -38,7 +38,7 @@
           <h1 class="text-4xl font-bold">{{ theClass.class_name }}</h1>
           <p>{{ theClass.class_description }}</p>
           <jet-btn class="bg-blue-400 mt-4">
-            <a :href="`class/${theClass.class_id}`">Enter</a>
+            <a :href="route('class', { id: theClass.class_id })">Enter</a>
           </jet-btn>
         </base-card>
       </div>

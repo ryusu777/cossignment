@@ -1,10 +1,10 @@
 <template>
-  <div class="max-w-7xl grid grid-cols-1 gap-3">
+  <div class="grid grid-cols-1 gap-3">
     <base-card class="p-4">
       <h3 class="font-semibold text-lg">{{ post.user_name }}</h3>
       <p class="text-sm">{{ new Date(post.created_at).toUTCString() }}</p>
       <h1 class="text-4xl mt-2">{{ post.post_title }}</h1>
-      <pre class="mt-5">{{ post.post_body }}</pre>
+      <p class="mt-5 whitespace-pre-line">{{ post.post_body }}</p>
 
       <!-- Comments -->
       <p class="mt-8 font-semibold text-blue-500">Comments</p>

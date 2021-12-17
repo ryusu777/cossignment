@@ -24,7 +24,7 @@
       </template>
     </jet-dialog>
 
-    <div class="py-12 px-8 grid grid-cols-1 gap-y-3">
+    <div class="mt-5 flex flex-col gap-y-4">
       <!-- Posts -->
       <post
         v-for="post in mutablePost"
