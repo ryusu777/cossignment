@@ -72,4 +72,9 @@ class User extends Authenticatable
         return $this->hasMany(TrClassPost::class, 'created_by');
     }
 
+    public function quizAnswers()
+    {
+        return $this->hasMany(TrQuizAnswer::class, 'student_id');
+    }
+
 }
