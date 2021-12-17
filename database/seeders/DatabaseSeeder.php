@@ -8,6 +8,9 @@ use App\Models\TrAssignmentTurnIn;
 use App\Models\TrClass;
 use App\Models\TrClassPost;
 use App\Models\TrPostComment;
+use App\Models\TrQuiz;
+use App\Models\TrQuizAnswer;
+use App\Models\TrQuizQuestion;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -49,5 +52,10 @@ class DatabaseSeeder extends Seeder
         TrAssignment::factory(30)->create();
         TrAssignmentAttachment::factory(10)->create();
         TrAssignmentTurnIn::factory(50)->create();
+
+        // Quiz seeding
+        TrQuiz::factory(5)->create();
+        TrQuizQuestion::factory(30)->create();
+        TrQuizAnswer::factory(20)->create();
     }
 }
